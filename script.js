@@ -56,8 +56,17 @@ function setLinks() {
     }
 }
 
-function setBackground() {
-    try {
+function imageExists(url) {
+    return new Promise(resolve => {
+        var img = new Image()
+        img.addEventListener('load', () => resolve(true))
+        img.addEventListener('error', () => resolve(false))
+        img.src = url
+    })
+}
+
+function setBackground(ok) {
+    if (ok) {
         document.body.style.backgroundImage = "url(image.jpg)"
         const buttons = document.querySelectorAll('.button')
         buttons.forEach( btn => {
@@ -68,7 +77,15 @@ function setBackground() {
                 this.style.backgroundColor = ""
             }
         })
-    } catch(e) {
-        console.log("Image not Found...")
+        console.log("Image loaded")
+    } else {
+        console.log("Image not found...")
     }
+
+}
+
+function checkBackgroundImage() {
+    const url = 'image.jpg'
+    imageExists(url)
+        .then(ok => setBackground(ok))
 }
