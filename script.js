@@ -55,3 +55,20 @@ function setLinks() {
         rows[1].appendChild(l)
     }
 }
+
+function setBackground() {
+    try {
+        document.body.style.backgroundImage = "url(image.jpg)"
+        const buttons = document.querySelectorAll('.button')
+        buttons.forEach( btn => {
+            btn.onmouseover = function() {
+                this.style.backgroundColor = "#282a36"
+            }
+            btn.onmouseout = function() {
+                this.style.backgroundColor = ""
+            }
+        })
+    } catch(e) {
+        console.log("Image not Found...")
+    }
+}
